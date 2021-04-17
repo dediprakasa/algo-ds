@@ -50,6 +50,7 @@ func (l *LinkedList) RemoveLast() {
 
   current.Next = nil
   l.Tail = current
+  l.Length--
 }
 
 func (l *LinkedList) RemoveFirst() {
@@ -58,6 +59,7 @@ func (l *LinkedList) RemoveFirst() {
   }
 
   l.Head = l.Head.Next
+  l.Length--
 }
 
 func (l LinkedList) IsEmpty() bool {
@@ -90,7 +92,6 @@ func main() {
   myLinkedList.AddLast(node2) // [33, 44]
   myLinkedList.AddFirst(node3) // [55, 33, 44]
   myLinkedList.AddFirst(node4) // [66, 55, 33, 44]
-
   PrintList(myLinkedList)
 
   fmt.Println(myLinkedList.Head.Value)  // 66
@@ -98,10 +99,9 @@ func main() {
   fmt.Println(myLinkedList.Length) // 4
 
   myLinkedList.RemoveLast() 
-  PrintList(myLinkedList)
+  PrintList(myLinkedList) // [66, 55, 33]
 
   myLinkedList.RemoveFirst()
-  PrintList(myLinkedList)
-
-  
+  PrintList(myLinkedList) // [55, 33]
+  fmt.Println(myLinkedList.Length) // 2
 }
