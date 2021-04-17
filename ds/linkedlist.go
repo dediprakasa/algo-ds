@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+  "fmt"
+  "strconv"
+)
 
 type Node struct {
   Value int
@@ -29,7 +32,7 @@ func (l *LinkedList) AddLast(node *Node) {
     l.Head = node
     l.Tail = node
   } else {
-    l.Head.Next = node
+    l.Tail.Next = node
     l.Tail = node
   }
   l.Length++
@@ -64,11 +67,19 @@ func (l LinkedList) IsEmpty() bool {
   return false
 }
 
+func PrintList(l LinkedList) {
+  list := ""
+  for l.Head.Next != nil {
+    list += strconv.Itoa(l.Head.Value) + " - "
+    l.Head = l.Head.Next
+  }
+  list += strconv.Itoa(l.Head.Value)
+  fmt.Println(list)
+}
+
 func main() {
   myLinkedList := LinkedList{}
-  
-  // true
-  fmt.Println(myLinkedList.IsEmpty())
+  fmt.Println(myLinkedList.IsEmpty()) // true
 
   node1 := &Node{Value: 33}
   node2 := &Node{Value: 44}
@@ -80,14 +91,17 @@ func main() {
   myLinkedList.AddFirst(node3) // [55, 33, 44]
   myLinkedList.AddFirst(node4) // [66, 55, 33, 44]
 
+  PrintList(myLinkedList)
+
   fmt.Println(myLinkedList.Head.Value)  // 66
   fmt.Println(myLinkedList.Tail.Value) // 44
   fmt.Println(myLinkedList.Length) // 4
 
   myLinkedList.RemoveLast() 
-  fmt.Println(myLinkedList.Tail.Value) //33
+  PrintList(myLinkedList)
 
   myLinkedList.RemoveFirst()
-  fmt.Println(myLinkedList.Head.Value) // 55
+  PrintList(myLinkedList)
 
+  
 }
